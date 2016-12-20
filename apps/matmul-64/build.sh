@@ -43,7 +43,7 @@ ELIBS="${EPIPHANY_HOME}/tools/host/lib"
 
 
 if [ -z "${CROSS_COMPILE+xxx}" ]; then
-case $(uname -p) in
+case $(uname -m) in
 	arm*)
 		# Use native arm compiler (no cross prefix)
 		CROSS_COMPILE=
