@@ -34,7 +34,8 @@
 #include <errno.h>
 
 #include <e-hal.h>
-#include <a_trace.h>
+#include <e-loader.h>
+#include <e-trace.h>
 
 const unsigned ShmSize = 128;
 const char ShmName[] = "test_shm";

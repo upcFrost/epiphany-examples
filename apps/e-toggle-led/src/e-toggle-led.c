@@ -25,6 +25,7 @@ along with this program, see the file COPYING. If not, see
 #include <unistd.h>
 
 #include <e-hal.h>
+#include <e-loader.h>
 
 #define _BufSize   (1024)
 #define _BufOffset (0x01000000)

@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/file.h> 
+#include <time.h>
+#include <unistd.h>
+
 #include <e-hal.h>
 #include "erm.h"
 

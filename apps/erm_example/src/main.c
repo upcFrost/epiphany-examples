@@ -29,7 +29,12 @@ along with this program, see the file COPYING. If not, see
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+
 #include <e-hal.h>
+#include <e-loader.h>
+
 #include "erm.h"
 
 

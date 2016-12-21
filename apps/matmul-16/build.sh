@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ "`arch`" == "x86_64" ]]; then
+if [[ "$(uname -m)" == "x86_64" ]]; then
 	echo "Setting path to ARM tools."
 	GNU_PATH='a-'
 else
