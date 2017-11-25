@@ -4,6 +4,10 @@
 *.o
 *.e
 *.d
+**/bin
+**/ll
+**/obj
+**/asm
 
 ######################
 # Emacs/vim/gedit backup files

@@ -1,0 +1,1 @@
+restore mem.val binary 0 0x2000 0x8000
