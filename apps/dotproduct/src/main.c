@@ -35,6 +35,7 @@ result.
 #include <stdlib.h>
 #include <stdio.h>
 #include <e-hal.h>
+#include <e-loader.h>
 #include "common.h"
 
 #define RESULT 85344 //recognize /Sum_{i=0}^{n-1} i^2 = \frac{N(N-1)(2N-1)}{6}

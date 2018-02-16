@@ -33,6 +33,7 @@
 #include <unistd.h>
 
 #include <e-hal.h>
+#include <e-loader.h>
 
 const unsigned ShmSize = 128;
 const char ShmName[] = "hello_shm"; 

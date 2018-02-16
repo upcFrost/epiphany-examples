@@ -24,6 +24,7 @@
 #include <inttypes.h>
 
 #include <e-hal.h>
+#include <e-loader.h>
 
 // Default maximum number of primality tests to run per core
 // This is used if a limit it not provided as a runtime argument in argv[1]

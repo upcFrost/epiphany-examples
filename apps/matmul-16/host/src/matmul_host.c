@@ -40,8 +40,10 @@
 #include <time.h>
 #include <math.h>
 #include <string.h>
+
 #include <e-hal.h>
 #include <e-loader.h>
+
 #include "matlib.h"
 #include "matmul.h"
 #include "common_buffers.h"
@@ -728,20 +730,24 @@ void matmul_strassen(volatile float * a, volatile float * b, volatile float * c,
     cs = allocate_real_matrix(NN, -1);
 
     for (i=0; i<NN; i++)
+    {
     	for (j=0; j<NN; j++)
     	{
     		as[i][j] = a[i*NN+j];
     		bs[i][j] = b[i*NN+j];
     	}
+    }
 
 	LEAF_SIZE = 32;
 	strassen(as, bs, cs, NN, LEAF_SIZE);
 
     for (i=0; i<NN; i++)
+    {
     	for (j=0; j<NN; j++)
     	{
     		c[i*NN+j] = cs[i][j];
     	}
+    }
 
     as = free_real_matrix(as, NN);
     bs = free_real_matrix(bs, NN);

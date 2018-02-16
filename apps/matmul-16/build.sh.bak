@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ "`arch`" == "x86_64" ]]; then
+if [[ "$(uname -m)" == "x86_64" ]]; then
 	echo "Setting path to ARM tools."
 	GNU_PATH='a-'
 else
@@ -42,7 +42,7 @@ ELIBS="${EPIPHANY_HOME}/tools/host/lib"
 
 
 if [ -z "${CROSS_COMPILE+xxx}" ]; then
-case $(uname -p) in
+case $(uname -m) in
 	arm*)
 		# Use native arm compiler (no cross prefix)
 		CROSS_COMPILE=
