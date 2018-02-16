@@ -1,5 +1,4 @@
 # ESDK setup
-EPIPHANY_HOME=/home/frost/Parallella/esdk.2016.11
 ESDK:=${EPIPHANY_HOME}
 EINCS:= $(strip -I${ESDK}/tools/host/include -I${ESDK}/tools/e-gnu/include -I${ESDK}/tools/e-gnu/epiphany-elf/include)
 ELDF:=src/matmul_internal.ldf
@@ -9,7 +8,6 @@ LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/lib:${LD_LIBRARY_PATH}
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/epiphany-elf/lib:${LD_LIBRARY_PATH}
 
 # LLVM Bin dir
-LLVMBIN=/home/frost/Parallella/llvm-build/bin
 
 # FLAGS
 GCCFLAGS=-c -Wall -Os

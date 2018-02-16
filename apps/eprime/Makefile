@@ -1,15 +1,13 @@
 # ESDK setup
-EPIPHANY_HOME=/home/frost/Parallella/esdk.master
 ESDK:=${EPIPHANY_HOME}
 EINCS:= $(strip -I${ESDK}/tools/host/include -I${ESDK}/tools/e-gnu/include -I${ESDK}/tools/e-gnu/epiphany-elf/include)
 ELDF:=${ESDK}/bsps/current/internal.ldf
-PATH:=$(PATH):/home/frost/Parallella/esdk.master/tools/e-gnu/bin
+PATH:=$(PATH):${EPIPHANY_HOME}/tools/e-gnu/bin
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/host/lib:${LD_LIBRARY_PATH}
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/lib:${LD_LIBRARY_PATH}
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/epiphany-elf/lib:${LD_LIBRARY_PATH}
 
 # LLVM Bin dir
-LLVMBIN=/home/frost/Parallella/llvm-build/bin
 
 # FLAGS
 GCCFLAGS=-c -Wall
@@ -59,10 +57,10 @@ obj/%.gcc.o: src/%.c makedirs
 	e-gcc $(GCCFLAGS) $(EINCS) $< -o $@
 
 obj/%.llvm.o: ll/%.ll makedirs
-	$(LLVMBIN)/llc $(LLCFLAGS) -filetype obj $< -o $@ --debug --print-after-all --print-before-all &> $@.debug
+	$(LLVMBIN)/llc $(LLCFLAGS) -filetype obj $< -o $@ # --debug --print-after-all --print-before-all &> $@.debug
 
 asm/%.llvm.s: ll/%.ll makedirs
-	$(LLVMBIN)/llc $(LLCFLAGS) -filetype asm $< -o $@ --debug --print-after-all --print-before-all &> $@.debug
+	$(LLVMBIN)/llc $(LLCFLAGS) -filetype asm $< -o $@ # --debug --print-after-all --print-before-all &> $@.debug
 
 ll/%.ll : src/%.c makedirs
 	$(LLVMBIN)/clang $(CLANGFLAGS) $(EINCS) -emit-llvm -S $< -o $@

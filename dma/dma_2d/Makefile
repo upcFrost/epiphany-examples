@@ -1,15 +1,13 @@
 # ESDK setup
-EPIPHANY_HOME=/home/frost/Parallella/esdk.master
 ESDK:=${EPIPHANY_HOME}
 EINCS:= $(strip -I${ESDK}/tools/host/include -I${ESDK}/tools/e-gnu/include -I${ESDK}/tools/e-gnu/epiphany-elf/include)
 ELDF:=${ESDK}/bsps/current/internal.ldf
-PATH:=$(PATH):/home/frost/Parallella/esdk.master/tools/e-gnu/bin
+PATH:=$(PATH):${EPIPHANY_HOME}/tools/e-gnu/bin
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/host/lib:${LD_LIBRARY_PATH}
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/lib:${LD_LIBRARY_PATH}
 LD_LIBRARY_PATH:=${EPIPHANY_HOME}/tools/e-gnu/epiphany-elf/lib:${LD_LIBRARY_PATH}
 
 # LLVM Bin dir
-LLVMBIN=/home/frost/Parallella/llvm-build/bin
 
 # FLAGS
 GCCFLAGS=-c -Wall

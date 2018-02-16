@@ -1,7 +1,11 @@
 Epiphany Examples
 =================
 
-[![Build Status](https://travis-ci.org/adapteva/epiphany-examples.svg?branch=master)](https://travis-ci.org/adapteva/epiphany-examples)
+Examples code adapted to use different compilers. Used for LLVM testing.
+
+Requires correct paths to be set in `env.sh`.
+
+Includes Makefile template to use with sample apps
 
 ---
 

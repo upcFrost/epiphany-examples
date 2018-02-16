@@ -1,1 +1,1 @@
-/home/frost/Parallella/test/epiphany-examples/apps/eprime/src/isprime.c
+/home/upcfrost/private/epiphany-examples/apps/eprime/src/isprime.c

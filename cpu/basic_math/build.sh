@@ -4,6 +4,7 @@ set -e
 
 ESDK=${EPIPHANY_HOME}
 ELIBS="-L ${ESDK}/tools/host/lib"
+ERPATH="-Wl,-rpath=${ESDK}/tools/host/lib -Wl,-rpath=${ESDK}/tools/e-gnu/lib"
 EINCS="-I ${ESDK}/tools/host/include"
 ELDF=${ESDK}/bsps/current/fast.ldf
 
@@ -24,7 +25,7 @@ esac
 fi
 
 # Build HOST side application
-${CROSS_COMPILE}gcc src/math_test.c -o bin/math_test.elf ${EINCS} ${ELIBS} -le-hal -lm -le-loader -lpthread
+${CROSS_COMPILE}gcc src/math_test.c -o bin/math_test.elf ${EINCS} ${ELIBS} ${ERPATH} -le-hal -lm -le-loader -lpthread
 
 # Build DEVICE side program
 e-gcc -g -O3 -T ${ELDF} src/e_math_test.c -o bin/e_math_test.elf -mfp-mode=round-nearest -le-lib -lm -ffast-math
