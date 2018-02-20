@@ -24,10 +24,14 @@ OBJECTS=$(SOURCES:src/%=obj/%)
 OBJECTSGCC=$(OBJECTS:.c=.gcc.o)
 OBJECTSLLVM=$(OBJECTS:.c=.llvm.o)
 EXECUTABLE=$(SOURCES:src/%.c=bin/%)
+LINK=e_prime.elf
 
 .PHONY: all
 
-all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc $(ASMFILESGCC) $(ASMFILESLLVM)
+all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc $(ASMFILESGCC) $(ASMFILESLLVM) link
+
+link:
+	ln -s -f `pwd`/bin/e_prime_llvm $(LINK)
 
 list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -57,10 +61,10 @@ obj/%.gcc.o: src/%.c makedirs
 	e-gcc $(GCCFLAGS) $(EINCS) $< -o $@
 
 obj/%.llvm.o: ll/%.ll makedirs
-	$(LLVMBIN)/llc $(LLCFLAGS) -filetype obj $< -o $@ # --debug --print-after-all --print-before-all &> $@.debug
+	$(LLVMBIN)/llc $(LLCFLAGS) -filetype obj $< -o $@ --debug --print-after-all --print-before-all > $@.debug 2>&1
 
 asm/%.llvm.s: ll/%.ll makedirs
-	$(LLVMBIN)/llc $(LLCFLAGS) -filetype asm $< -o $@ # --debug --print-after-all --print-before-all &> $@.debug
+	$(LLVMBIN)/llc $(LLCFLAGS) -filetype asm $< -o $@ --debug --print-after-all --print-before-all > $@.debug 2>&1
 
 ll/%.ll : src/%.c makedirs
 	$(LLVMBIN)/clang $(CLANGFLAGS) $(EINCS) -emit-llvm -S $< -o $@

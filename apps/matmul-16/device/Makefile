@@ -24,10 +24,14 @@ OBJECTS=$(SOURCES:src/%=obj/%)
 OBJECTSGCC=$(OBJECTS:.c=.gcc.o)
 OBJECTSLLVM=$(OBJECTS:.c=.llvm.o)
 EXECUTABLE=bin/e_matmul
+LINK=Release/e_matmul.elf
 
 .PHONY: all
 
-all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc $(ASMFILESLLVM) $(ASMFILESGCC)
+all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc $(ASMFILESLLVM) $(ASMFILESGCC) link
+
+link:
+	ln -s -f `pwd`/$(EXECUTABLE)_gcc $(LINK)
 
 list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
@@ -54,7 +58,7 @@ asm/%.gcc.s: obj/%.gcc.o makedirs
 	e-objdump -D $< > $@
 
 obj/%.gcc.o: src/%.c makedirs
-	e-gcc $(GCCFLAGS) $(EINCS) $< -o $@
+	e-gcc -g $(GCCFLAGS) $(EINCS) $< -o $@
 
 obj/%.llvm.o: ll/%.ll makedirs
 	$(LLVMBIN)/llc $(LLCFLAGS) -filetype obj $< -o $@
@@ -63,4 +67,4 @@ asm/%.llvm.s: ll/%.ll makedirs
 	$(LLVMBIN)/llc $(LLCFLAGS) -filetype asm $< -o $@
 
 ll/%.ll : src/%.c makedirs
-	$(LLVMBIN)/clang $(CLANGFLAGS) $(EINCS) -emit-llvm -S $< -o $@
+	$(LLVMBIN)/clang -g $(CLANGFLAGS) $(EINCS) -emit-llvm -S $< -o $@

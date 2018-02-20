@@ -15,7 +15,7 @@ if [[ "$1" == "-d" ]]; then
 else
 	Config='Release'
 fi
-BUILD_DEVICE='yes'
+BUILD_DEVICE='no'
 BUILD_HOST='yes'
 
 MK_CLEAN='yesXX'

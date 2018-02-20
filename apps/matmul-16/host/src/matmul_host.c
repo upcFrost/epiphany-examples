@@ -50,7 +50,7 @@
 
 #define __DO_STRASSEN__
 #define __WIPE_OUT_RESULT_MATRIX__
-#undef  __DUMP_MATRICES__
+#undef __DUMP_MATRICES__
 
 #define _MAX_MEMBER_ 32
 #define eMHz 600

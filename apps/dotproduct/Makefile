@@ -22,10 +22,14 @@ OBJECTS=$(SOURCES:src/%=obj/%)
 OBJECTSGCC=$(OBJECTS:.c=.gcc.o)
 OBJECTSLLVM=$(OBJECTS:.c=.llvm.o)
 EXECUTABLE=$(SOURCES:src/%.c=bin/%)
+LINK=$(EXECUTABLE).elf
 
 .PHONY: all
 
-all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc
+all: clean $(EXECUTABLE)_llvm $(EXECUTABLE)_gcc link
+
+link:
+	ln -s -f `pwd`/$(EXECUTABLE)_llvm $(LINK)
 
 list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$'
